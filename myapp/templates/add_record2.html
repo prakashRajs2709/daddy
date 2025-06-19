@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Record</title>
+</head>
+<body>
+    <h1>Add Student Record</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form2.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'next' %}">Back to Next</a>
+</body>
+</html>

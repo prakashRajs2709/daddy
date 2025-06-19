@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aggregated Marks PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Bright High School</h1>
+    <h2 style="text-align: center;">R.K.Garden, Neelasandra, Bangalore-560047</h2>
+    <h2 style="text-align: center;">Consolidated Marks List-2025-26</h2>
+    <table>
+        <tr>
+            <th rowspan="2">SL No</th>
+            <th rowspan="2">Name</th>
+            <th colspan="6">Subjects</th>
+        </tr>
+        <tr>
+            <th>English</th>
+            <th>Kannada</th>
+            <th>Hindi</th>
+            <th>Maths</th>
+            <th>Science</th>
+            <th>Social Science</th>
+        </tr>
+        {% for record in aggregated_records %}
+        <tr>
+            <td>{{ record.slno }}</td>
+            <td>{{ record.name }}</td>
+            <!-- <td>Total 50</td>
+            <td>{{ record.kan }}</td>
+            <td>{{ record.hin }}</td>
+            <td>{{ record.maths }}</td>
+            <td>{{ record.sci }}</td>
+            <td>{{ record.soc_sci }}</td> -->
+        </tr>
+        <tr>
+            <td colspan="2">FA1</td>
+            <td>{{ record.fa1.eng }}</td>
+            <td>{{ record.fa1.kan }}</td>
+            <td>{{ record.fa1.hin }}</td>
+            <td>{{ record.fa1.maths }}</td>
+            <td>{{ record.fa1.sci }}</td>
+            <td>{{ record.fa1.soc_sci }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">FA2</td>
+            <td>{{ record.fa2.eng }}</td>
+            <td>{{ record.fa2.kan }}</td>
+            <td>{{ record.fa2.hin }}</td>
+            <td>{{ record.fa2.maths }}</td>
+            <td>{{ record.fa2.sci }}</td>
+            <td>{{ record.fa2.soc_sci }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">FA3</td>
+            <td>{{ record.fa3.eng }}</td>
+            <td>{{ record.fa3.kan }}</td>
+            <td>{{ record.fa3.hin }}</td>
+            <td>{{ record.fa3.maths }}</td>
+            <td>{{ record.fa3.sci }}</td>
+            <td>{{ record.fa3.soc_sci }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">FA4</td>
+            <td>{{ record.fa4.eng }}</td>
+            <td>{{ record.fa4.kan }}</td>
+            <td>{{ record.fa4.hin }}</td>
+            <td>{{ record.fa4.maths }}</td>
+            <td>{{ record.fa4.sci }}</td>
+            <td>{{ record.fa4.soc_sci }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">200</td>
+            <td>{{ record.eng_sum }}</td>
+            <td>{{ record.kan_sum }}</td>
+            <td>{{ record.hin_sum }}</td>
+            <td>{{ record.maths_sum }}</td>
+            <td>{{ record.sci_sum }}</td>
+            <td>{{ record.soc_sci_sum }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">25/20</td>
+            <td>{{ record.eng }}</td>
+            <td>{{ record.kan }}</td>
+            <td>{{ record.hin }}</td>
+            <td>{{ record.maths }}</td>
+            <td>{{ record.sci }}</td>
+            <td>{{ record.soc_sci }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
