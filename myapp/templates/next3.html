@@ -91,7 +91,7 @@
     <h1 style="text-align: center;">Bright High School</h1>
     <h2 style="text-align: center;">R.K.Garden, Neelasandra, Bangalore-560047</h2>
     <h2 style="text-align: center;">Formative Assessment-4 Marks List-2025-26</h2>
-    <button><a href="{% url 'add_record4' %}">Add Record</a></button>
+
     <button><a href="{% url 'export_csv4' %}">Export CSV</a></button>
     <table border="1">
         <tr>
@@ -117,11 +117,13 @@
             <td>{{ record.sci }}</td>
             <td>{{ record.soc_sci }}</td>
             <td>{{ record.total }}</td>
-            <td><a href="{% url 'delete_record4' record.slno %}">Delete</a></td>
+            <td> <a href="{% url 'edit_record4' record.pk %}">Edit</a> |
+                <a href="{% url 'delete_record4' record.slno %}">Delete</a></td>
         </tr>
         {% endfor %}
     </table>
-    <button><a href="{% url 'export_csv4' %}">Export CSV</a></button>
+
+    <button><a href="{% url 'next2' %}">PREVIOUS</a></button>
     <button><a href="{% url 'aggregate_marks' %}">Aggregate Marks</a> <!-- New button for aggregate marks --></button>
 </body>
 </html>

@@ -172,8 +172,8 @@
         </tr>
         {% endfor %}
     </table>
-    <a href="{% url 'home' %}">HOME</a>
-    <a href="{% url 'export_aggregate_csv' %}">Export Aggregated list as CSV</a> <!-- New button for exporting aggregated marks -->
-    <a href="{% url 'export_aggregate_pdf' %}">Export Aggregated list as PDF</a>
+    <button><a href="{% url 'home' %}">HOME</a></button>
+    <button><a href="{% url 'export_aggregate_csv' %}">Export Aggregated list as CSV</a></button> <!-- New button for exporting aggregated marks -->
+    <button><a href="{% url 'export_aggregate_pdf' %}">Export Aggregated list as PDF</a></button>
 </body>
 </html> 

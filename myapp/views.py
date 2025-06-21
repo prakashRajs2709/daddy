@@ -1,3 +1,4 @@
+import math
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import FA1, FA2, FA3, FA4
@@ -30,41 +31,63 @@ def add_record(request):
     if request.method == 'POST':
         form = FA1form(request.POST)
         if form.is_valid():
-            form.save()
+            fa1_instance = form.save()
+
+            # Automatically create blank FA2, FA3, FA4 records with same slno and name
+            FA2.objects.create(
+                slno=fa1_instance.slno, name=fa1_instance.name,
+                eng=0, kan=0, hin=0, maths=0, sci=0, soc_sci=0
+            )
+            FA3.objects.create(
+                slno=fa1_instance.slno, name=fa1_instance.name,
+                eng=0, kan=0, hin=0, maths=0, sci=0, soc_sci=0
+            )
+            FA4.objects.create(
+                slno=fa1_instance.slno, name=fa1_instance.name,
+                eng=0, kan=0, hin=0, maths=0, sci=0, soc_sci=0
+            )
+
             return redirect('home')
     else:
         form = FA1form()
     return render(request, 'add_record.html', {'form': form})
 
-def add_record2(request):
+
+def edit_record2(request, pk):
+    record = get_object_or_404(FA2, pk=pk)
     if request.method == 'POST':
-        form2 = FA2form(request.POST)
+        form2 = FA2form(request.POST, instance=record)
         if form2.is_valid():
             form2.save()
             return redirect('next')
     else:
-        form2 = FA2form()
-    return render(request, 'add_record2.html', {'form2': form2})
+        form2 = FA2form(instance=record)
+    return render(request, 'edit_record2.html', {'form2': form2})
 
-def add_record3(request):
+
+def edit_record3(request, pk):
+    record = get_object_or_404(FA3, pk=pk)
     if request.method == 'POST':
-        form3 = FA3form(request.POST)
+        form3 = FA3form(request.POST, instance=record)
         if form3.is_valid():
             form3.save()
             return redirect('next2')
     else:
-        form3 = FA3form()
-    return render(request, 'add_record3.html', {'form3': form3})
+        form3 = FA3form(instance=record)
+    return render(request, 'edit_record3.html', {'form3': form3})
 
-def add_record4(request):
+
+def edit_record4(request, pk):
+    record = get_object_or_404(FA4, pk=pk)
     if request.method == 'POST':
-        form4 = FA4form(request.POST)
+        form4 = FA4form(request.POST, instance=record)
         if form4.is_valid():
             form4.save()
             return redirect('next3')
     else:
-        form4 = FA4form()
-    return render(request, 'add_record4.html', {'form4': form4})
+        form4 = FA4form(instance=record)
+    return render(request, 'edit_record4.html', {'form4': form4})
+
 
 def delete_record(request, pk):
     record = get_object_or_404(FA1, pk=pk)
@@ -158,12 +181,13 @@ def aggregate_marks(request):
         sci_sum = fa1.sci + fa2.sci + fa3.sci + fa4.sci
         soc_sci_sum = fa1.soc_sci + fa2.soc_sci + fa3.soc_sci + fa4.soc_sci
 
-        eng = round((eng_sum / 200) * 25)
-        kan = round((kan_sum / 200) * 20)
-        hin = round((hin_sum / 200) * 20)
-        maths = round((maths_sum / 200) * 20)
-        sci = round((sci_sum / 200) * 20)
-        soc_sci = round((soc_sci_sum / 200) * 20)
+        eng = math.ceil((eng_sum / 200) * 25)
+        kan = math.ceil((kan_sum / 200) * 20)
+        hin = math.ceil((hin_sum / 200) * 20)
+        maths = math.ceil((maths_sum / 200) * 20)
+        sci = math.ceil((sci_sum / 200) * 20)
+        soc_sci = math.ceil((soc_sci_sum / 200) * 20)
+
         total = eng + kan + hin + maths + sci + soc_sci
 
         aggregated_record = {
